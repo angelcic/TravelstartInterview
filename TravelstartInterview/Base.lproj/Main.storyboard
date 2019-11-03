@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dL1-W6-sSN">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -15,30 +16,63 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yih-qI-qPj">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yih-qI-qPj">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                                <color key="sectionIndexBackgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sks-fe-xP0">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="找不到可用的網路連線" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F12-QJ-NKf">
+                                        <rect key="frame" x="120.5" y="130" width="173.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="0.3008347603" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T2i-Jq-5Se">
+                                        <rect key="frame" x="176" y="200.5" width="62" height="30"/>
+                                        <state key="normal" title="再試一次"/>
+                                        <connections>
+                                            <action selector="pressRetryFetchTouristSites" destination="BYZ-38-t0r" eventType="touchUpInside" id="fOe-16-pvP"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="F12-QJ-NKf" firstAttribute="centerX" secondItem="sks-fe-xP0" secondAttribute="centerX" id="Hkw-vb-E5Y"/>
+                                    <constraint firstItem="T2i-Jq-5Se" firstAttribute="top" secondItem="F12-QJ-NKf" secondAttribute="bottom" constant="50" id="R5b-Aq-eYT"/>
+                                    <constraint firstItem="T2i-Jq-5Se" firstAttribute="centerX" secondItem="sks-fe-xP0" secondAttribute="centerX" id="Ysj-KN-oTW"/>
+                                    <constraint firstItem="F12-QJ-NKf" firstAttribute="top" secondItem="sks-fe-xP0" secondAttribute="top" constant="130" id="z3r-fR-yr4"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="yih-qI-qPj" secondAttribute="trailing" id="Fbe-5s-UdM"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="yih-qI-qPj" secondAttribute="bottom" id="Pbv-iW-J4p"/>
-                            <constraint firstItem="yih-qI-qPj" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="WHl-VO-rpu"/>
+                            <constraint firstItem="yih-qI-qPj" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="WHl-VO-rpu"/>
                             <constraint firstItem="yih-qI-qPj" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Zoc-Ca-0ch"/>
+                            <constraint firstItem="sks-fe-xP0" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="bWw-35-enA"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="sks-fe-xP0" secondAttribute="bottom" id="dnn-6r-9qJ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="sks-fe-xP0" secondAttribute="trailing" id="eP2-VV-JEa"/>
+                            <constraint firstItem="sks-fe-xP0" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="itq-Ot-bjr"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="ji3-We-A97"/>
+                    <connections>
+                        <outlet property="noNetWorkAlertLayer" destination="sks-fe-xP0" id="cjG-E6-GF9"/>
+                        <outlet property="tableView" destination="yih-qI-qPj" id="Ei8-Oz-h13"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1047.8260869565217" y="114.50892857142857"/>
         </scene>
-        <!--View Controller-->
+        <!--Detail View Controller-->
         <scene sceneID="UMK-Ks-lbI">
             <objects>
-                <viewController id="YPL-z3-Qps" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailViewController" id="YPL-z3-Qps" customClass="DetailViewController" customModule="TravelstartInterview" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="J3m-bd-hx4">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -46,6 +80,11 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xLd-fj-KnN">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="cyD-SU-oX6" customClass="TSGalleryView" customModule="TravelstartInterview" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                </view>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -57,6 +96,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="uWH-UH-FDk"/>
                     </view>
+                    <connections>
+                        <outlet property="imageGallery" destination="cyD-SU-oX6" id="5jg-4x-zv2"/>
+                        <outlet property="tableView" destination="xLd-fj-KnN" id="meE-VQ-2Cs"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ylh-wo-PQz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
