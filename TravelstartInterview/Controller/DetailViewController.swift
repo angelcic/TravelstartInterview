@@ -52,7 +52,8 @@ class DetailViewController: BaseViewController {
         super.viewDidLoad()
         
         setupTableView()
-        imageGallery.datas = imageSet
+        imageGallery.setupGallery(imageURLs: imageSet, index: currentImageIndex)
+//        imageGallery.datas = imageSet
     }
     
     func initDetailVC(sitesData: TouristSitesDetail,
@@ -68,6 +69,35 @@ class DetailViewController: BaseViewController {
     
     func setupTableView() {
         tableView.registerCellWithNib(identifier: DetailStringTableViewCell.identifier, bundle: nil)
+    }
+    
+    func navigationWithMapApp() {
+        guard let latitudeString = sitesData?.latitude,
+            let latitude = Double(latitudeString),
+            let longitudeString = sitesData?.longitude,
+            let longitude = Double(longitudeString)
+        else {
+            return
+        }
+        
+        if let url =
+            URL(string: MapNavigation.google(
+                latitude: latitude,
+                longitude: longitude).url),
+            UIApplication.shared.canOpenURL(url) {
+            
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            
+        // 跳轉至 apple map
+        } else if let url =
+            URL(string: MapNavigation.apple(
+                latitude: latitude,
+                longitude: longitude).url),
+            UIApplication.shared.canOpenURL(url) {
+            
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            
+        }
     }
     
 }
@@ -91,11 +121,40 @@ extension DetailViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         
+        let title = detailContent[indexPath.row].subtitle
+        var isHiddenRightButton = true
+        
+        if title == "地址" {
+            isHiddenRightButton = false
+            cell.delegate = self
+        }
+        
         cell.layoutCell(title: detailContent[indexPath.row].subtitle,
-                        text: detailContent[indexPath.row].contentText)
+                        text: detailContent[indexPath.row].contentText,
+                        isHiddenButton: isHiddenRightButton)
         
         return cell
     }
     
-    
 }
+
+extension DetailViewController :DetailStringTVCDelegate {
+    func pressRightButton(_ cell: DetailStringTableViewCell) {
+        navigationWithMapApp()
+    }
+}
+
+enum MapNavigation {
+    case google(latitude: Double, longitude: Double)
+    case apple(latitude: Double, longitude: Double)
+    
+    var url: String {
+        switch self {
+        case .google(let latitude, let longitude):
+            return "comgooglemaps://?saddr=&daddr=\(latitude),\(longitude)&directionsmode=driving"
+        case .apple(let latitude, let longitude):
+            return "http://maps.apple.com/?saddr=&daddr=\(latitude),\(longitude)"
+        }
+    }
+}
+

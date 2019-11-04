@@ -11,8 +11,16 @@ import XCTest
 
 class TravelstartInterviewTests: XCTestCase {
 
+    let rootVC = RootViewController()
+    
     override func setUp() {
+        rootVC.touristSitesProvider = MockAPIManager()
         // Put setup code here. This method is called before the invocation of each test method in the class.
+    }
+    
+    func test() {
+        rootVC.fetchTouristSites()
+        XCTAssertEqual(rootVC.status, .empty)
     }
 
     override func tearDown() {
@@ -20,4 +28,16 @@ class TravelstartInterviewTests: XCTestCase {
     }
 
 
+}
+
+class MockAPIManager: APIManagerProtocol {
+    func fetchTouristSite(limit: Int, offset: Int, resultHandler: @escaping (Result<TouristSitesResult, Error>) -> Void) {
+        
+        // empty
+        resultHandler(Result.success(TouristSitesResult(limit: 10, offset: 0, count: 20, results: [])))
+        
+    }
+    
+    var isNetworkConnect: Bool = true
+    
 }

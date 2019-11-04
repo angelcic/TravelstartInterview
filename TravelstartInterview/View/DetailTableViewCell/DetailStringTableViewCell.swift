@@ -8,11 +8,18 @@
 
 import UIKit
 
+protocol DetailStringTVCDelegate: AnyObject {
+    func pressRightButton(_ cell: DetailStringTableViewCell)
+}
+
 class DetailStringTableViewCell: UITableViewCell {
     
     @IBOutlet weak var subtitle: UILabel!
     @IBOutlet weak var innerText: UILabel!
-
+    @IBOutlet weak var navigationButton: UIButton!
+    
+    weak var delegate: DetailStringTVCDelegate?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -24,10 +31,14 @@ class DetailStringTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func layoutCell(title: String, text: String?) {
+    func layoutCell(title: String, text: String?, isHiddenButton: Bool = true) {
         subtitle.text = title
         innerText.text = text
+        navigationButton.isHidden = isHiddenButton
     }
     
+    @IBAction func pressRightButton() {
+        delegate?.pressRightButton(self)
+    }
     
 }

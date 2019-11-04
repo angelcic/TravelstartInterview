@@ -10,6 +10,7 @@ target 'TravelstartInterview' do
   pod 'MJRefresh'
   pod 'IQKeyboardManager'
   pod 'SwiftLint'
+  pod 'Toast-Swift', '~> 5.0.0'
 
   target 'TravelstartInterviewTests' do
     inherit! :search_paths

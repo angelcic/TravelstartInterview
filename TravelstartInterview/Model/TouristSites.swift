@@ -43,7 +43,9 @@ extension TouristSitesDetail {
     
     func decodeTouristFileURLString(_ urlString: String) -> [String] {
         let urlArray: [String] = urlString.lowercased().components(separatedBy: "http").compactMap {
-            if $0.isEmpty || !$0.contains("jpg") {
+            if $0.isEmpty {
+                return nil
+            } else if !$0.contains("png") && !$0.contains("jpg") {
                 return nil
             } else {
                 return "http" + $0

@@ -39,6 +39,7 @@
 		91E0525C236F021A00D0D49E /* TSGalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E0525B236F021A00D0D49E /* TSGalleryView.swift */; };
 		91E05260236F353100D0D49E /* DetailStringTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E0525E236F353100D0D49E /* DetailStringTableViewCell.swift */; };
 		91E05261236F353100D0D49E /* DetailStringTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91E0525F236F353100D0D49E /* DetailStringTableViewCell.xib */; };
+		91E05265236FF9A500D0D49E /* ToastWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E05264236FF9A500D0D49E /* ToastWrapper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +90,7 @@
 		91E0525B236F021A00D0D49E /* TSGalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TSGalleryView.swift; sourceTree = "<group>"; };
 		91E0525E236F353100D0D49E /* DetailStringTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailStringTableViewCell.swift; sourceTree = "<group>"; };
 		91E0525F236F353100D0D49E /* DetailStringTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailStringTableViewCell.xib; sourceTree = "<group>"; };
+		91E05264236FF9A500D0D49E /* ToastWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastWrapper.swift; sourceTree = "<group>"; };
 		92FC56501E13C80FF3D84A2C /* Pods_TravelstartInterviewTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TravelstartInterviewTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A692B4359828453BE9C2885 /* Pods-TravelstartInterview.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelstartInterview.debug.xcconfig"; path = "Target Support Files/Pods-TravelstartInterview/Pods-TravelstartInterview.debug.xcconfig"; sourceTree = "<group>"; };
 		D852DF4AD0290E5BED893E2E /* Pods-TravelstartInterviewTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelstartInterviewTests.debug.xcconfig"; path = "Target Support Files/Pods-TravelstartInterviewTests/Pods-TravelstartInterviewTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -225,9 +227,8 @@
 			isa = PBXGroup;
 			children = (
 				912297D4236C6AA2007B8059 /* SitesListTableViewCell */,
-				91E0525B236F021A00D0D49E /* TSGalleryView.swift */,
-				91E0525E236F353100D0D49E /* DetailStringTableViewCell.swift */,
-				91E0525F236F353100D0D49E /* DetailStringTableViewCell.xib */,
+				91E0526623700A2900D0D49E /* DetailTableViewCell */,
+				91E0526723700A5300D0D49E /* UITool */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -251,6 +252,7 @@
 			children = (
 				91E05257236ED18700D0D49E /* MJRefreshWrapper.swift */,
 				91E05259236ED66500D0D49E /* KingFisherWrapper.swift */,
+				91E05264236FF9A500D0D49E /* ToastWrapper.swift */,
 			);
 			path = ThirdPartyWrapper;
 			sourceTree = "<group>";
@@ -262,6 +264,23 @@
 				912297DA236C70C7007B8059 /* SitesListImageCollectionViewCell.xib */,
 			);
 			path = imageCollectionView;
+			sourceTree = "<group>";
+		};
+		91E0526623700A2900D0D49E /* DetailTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				91E0525E236F353100D0D49E /* DetailStringTableViewCell.swift */,
+				91E0525F236F353100D0D49E /* DetailStringTableViewCell.xib */,
+			);
+			path = DetailTableViewCell;
+			sourceTree = "<group>";
+		};
+		91E0526723700A5300D0D49E /* UITool */ = {
+			isa = PBXGroup;
+			children = (
+				91E0525B236F021A00D0D49E /* TSGalleryView.swift */,
+			);
+			path = UITool;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -452,6 +471,7 @@
 				91E0525A236ED66500D0D49E /* KingFisherWrapper.swift in Sources */,
 				9122979023692D6B007B8059 /* SceneDelegate.swift in Sources */,
 				912297B7236AA91A007B8059 /* UIColorExtension.swift in Sources */,
+				91E05265236FF9A500D0D49E /* ToastWrapper.swift in Sources */,
 				912297BC236ABBD6007B8059 /* TouristSitesRequest.swift in Sources */,
 				912297BE236ABDD2007B8059 /* TouristSites.swift in Sources */,
 				912297E2236D52C7007B8059 /* UIStoryboardExtension.swift in Sources */,

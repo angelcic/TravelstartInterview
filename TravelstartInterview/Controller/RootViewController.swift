@@ -31,11 +31,13 @@ class RootViewController: BaseViewController {
         }
     }
     
-    var totalToristSitesNum = 0
-
-    var touristSitesObserver: NSKeyValueObservation!
+    var totalToristSitesNum = 0 // server 上資料筆數
     
-    let touristSitesProvider = APIManager.shared
+//    var touristSitesObserver: NSKeyValueObservation!
+    
+    var touristSitesProvider: APIManagerProtocol = APIManager.shared
+    
+    var status: RootViewControllerStatus = .loading
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,19 +81,40 @@ class RootViewController: BaseViewController {
     func fetchTouristSites() {
         if touristSitesProvider.isNetworkConnect {
             noNetWorkAlertLayer.isHidden = true
+            
+            
+            status = .loading
             touristSitesProvider.fetchTouristSite(limit: 10, offset: self.touristSites.count) {[weak self] result in
+                
                 switch result {
+                    
                 case .success(let touristSite):
                     self?.tableView.endFooterRefreshing()
+                    
+                    
                     self?.totalToristSitesNum = touristSite.count
-                    self?.touristSites += touristSite.results
+                    if touristSite.results.count == 0 {
+                        self?.status = .empty
+                    } else {
+                        self?.status = .normal
+                        self?.touristSites += touristSite.results
+                    }
+                    
                 case .failure(let error):
+                    self?.status = .error
+                    DispatchQueue.main.async {
+                        self?.view.acMakeToast("請求資料發生問題", duration: 3.0, position: .center)
+                    }
                     print(error)
                 }
             }
         } else {
+            if touristSites.count > 0 {
+                self.view.acMakeToast("沒有網路連線，請檢查網路", duration: 3.0, position: .center)
+            } else {
+                noNetWorkAlertLayer.isHidden = false
+            }
             tableView.endFooterRefreshing()
-            noNetWorkAlertLayer.isHidden = false
         }
     }
 
@@ -115,6 +138,7 @@ class RootViewController: BaseViewController {
     @IBAction func pressRetryFetchTouristSites() {
         fetchTouristSites()
     }
+    
 }
 
 extension RootViewController: UITableViewDelegate {
@@ -202,4 +226,11 @@ extension RootViewController: SitesListImageCellDelegate {
         navigationToDetailPage(tourist: touristSitesDetail, images: images, imageIndex: imageIndex)
     }
     
+}
+
+enum RootViewControllerStatus {
+    case error
+    case normal
+    case loading
+    case empty
 }

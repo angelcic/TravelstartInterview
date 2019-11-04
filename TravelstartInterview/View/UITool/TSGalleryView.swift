@@ -13,12 +13,20 @@ class TSGalleryView: UIView {
     
     var datas: [String] = [] {
         didSet {
-            setScrollView()
+            setupScrollView()
+//            scrollToImage(at: imageIndex)
         }
     }
     
     let screenWidth = UIScreen.main.bounds.width
     let imageViewScale: CGFloat = 2 / 3
+    
+    var imageIndex: Int = 0 {
+        didSet {
+//            setupScrollView()
+            scrollToImage(at: imageIndex)
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -54,7 +62,12 @@ class TSGalleryView: UIView {
         
     }
     
-    func setScrollView() {
+    func setupGallery(imageURLs: [String], index: Int = 0) {
+        datas = imageURLs
+        imageIndex = index
+    }
+    
+    func setupScrollView() {
         let imageCount = datas.count   // 依據多少張圖片調整 scrollView 寬度
         let scrollViewHeight = screenWidth * imageViewScale // 寬高比3:2
         let scrollViewContentWidth = screenWidth * CGFloat(integerLiteral: imageCount)
@@ -68,8 +81,10 @@ class TSGalleryView: UIView {
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.bounces = false // 超過 ScrollView 範圍自動回彈，false 時不能捲動超過邊界
         scrollView.isPagingEnabled = true // 一次捲動一頁的範圍
+        scrollView.delegate = self
         
         prepareImageView(screenWidth, scrollViewHeight)
+                
     }
     
     func prepareImageView(_ superViewWidth: CGFloat,
@@ -94,5 +109,14 @@ class TSGalleryView: UIView {
         }
         
     }
+    
+    func scrollToImage(at index: Int) {
+        let position = CGPoint(x: CGFloat(index) * screenWidth, y: 0)
+        scrollView.setContentOffset(position, animated: false)
+    }
+    
+}
+
+extension TSGalleryView: UIScrollViewDelegate {
     
 }
