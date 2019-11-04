@@ -53,4 +53,7 @@ extension TouristSitesDetail {
     }
 }
 
-
+struct DetailContent {
+    let subtitle: String
+    let contentText: String?
+}

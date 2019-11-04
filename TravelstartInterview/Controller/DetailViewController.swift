@@ -33,7 +33,20 @@ class DetailViewController: BaseViewController {
     
     var sitesData: TouristSitesDetail?
     
-    let subTitle: [String] = ["景點名稱", "景點介紹", "地址", "開放時間", "交通資訊", "鄰近捷運", "地圖"]
+    var detailContent: [DetailContent] {
+        
+        guard let sitesData = sitesData else { return [] }
+        
+        return [
+            DetailContent(subtitle: "景點名稱", contentText: sitesData.stitle),
+            DetailContent(subtitle: "景點介紹", contentText: sitesData.xbody),
+            DetailContent(subtitle: "地址", contentText: sitesData.address),
+            DetailContent(subtitle: "開放時間", contentText: sitesData.memoTime),
+            DetailContent(subtitle: "交通資訊", contentText: sitesData.info)
+//            DetailContent(subtitle: "鄰近捷運", contentText: sitesData.stitle),
+//            DetailContent(subtitle: "地圖", contentText: sitesData.stitle)
+        ]
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,7 +78,7 @@ extension DetailViewController: UITableViewDelegate {
 
 extension DetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return subTitle.count
+        return detailContent.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -78,7 +91,8 @@ extension DetailViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        cell.layoutCell(title: <#T##String#>, text: <#T##String?#>)
+        cell.layoutCell(title: detailContent[indexPath.row].subtitle,
+                        text: detailContent[indexPath.row].contentText)
         
         return cell
     }
