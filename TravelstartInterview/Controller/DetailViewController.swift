@@ -100,28 +100,17 @@ extension DetailViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        guard
-//            let cell = tableView.dequeueReusableCell(
-//                withIdentifier: DetailStringTableViewCell.identifier,
-//                for: indexPath)
-//            as? DetailStringTableViewCell
-//        else {
-//            return UITableViewCell()
-//        }
-//
-//        let title = detailContent[indexPath.row].subtitle
-//        var isHiddenRightButton = true
-//
-//        if title == "地址" {
-//            isHiddenRightButton = false
-//            cell.delegate = self
-//        }
-//
-//        cell.layoutCell(title: detailContent[indexPath.row].subtitle,
-//                        text: detailContent[indexPath.row].contentText,
-//                        isHiddenButton: isHiddenRightButton)
-        guard let sitesData = sitesData else {return UITableViewCell()}
-        let cell = detailContent[indexPath.row].cellForIndexPath(indexPath, tableView: tableView, data: sitesData)
+        
+        guard
+            let sitesData = sitesData
+        else {
+            return UITableViewCell()
+        }
+        
+        let cell = detailContent[indexPath.row].cellForIndexPath(indexPath,
+                                                                 tableView: tableView,
+                                                                 data: sitesData)
+        
         return cell
     }
     
@@ -141,6 +130,7 @@ enum MapNavigation {
         switch self {
         case .google(let latitude, let longitude):
             return "comgooglemaps://?saddr=&daddr=\(latitude),\(longitude)&directionsmode=driving"
+            
         case .apple(let latitude, let longitude):
             return "http://maps.apple.com/?saddr=&daddr=\(latitude),\(longitude)"
         }

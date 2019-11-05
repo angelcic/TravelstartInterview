@@ -15,6 +15,9 @@ class TravelstartInterviewTests: XCTestCase {
     
     override func setUp() {
         rootVC.touristSitesProvider = MockAPIManager()
+        rootVC.changeUIByStatus = { status in
+            
+        }
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
     

@@ -18,7 +18,11 @@ class RootViewController: BaseViewController {
         }
     }
     
-    @IBOutlet weak var noNetWorkAlertLayer: UIView!
+    @IBOutlet weak var noNetWorkAlertLayer: UIView! {
+        didSet {
+//            setupStatusObserer()
+        }
+    }
     
     var touristSites: [TouristSitesDetail] = [] {
         didSet {
@@ -35,7 +39,13 @@ class RootViewController: BaseViewController {
     
     var touristSitesProvider: APIManagerProtocol = APIManager.shared
     
-    var status: RootViewControllerStatus = .normal
+    lazy var changeUIByStatus: ((_:RootViewControllerStatus) -> Void) = changeUI
+    
+    var status: RootViewControllerStatus = .normal {
+        didSet{
+            changeUIByStatus(status)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,16 +90,16 @@ class RootViewController: BaseViewController {
     
     func fetchTouristSites() {
         if touristSitesProvider.isNetworkConnect && status != .loading {
-            noNetWorkAlertLayer.isHidden = true
+//            noNetWorkAlertLayer.isHidden = true
             
             status = .loading
             
             touristSitesProvider.fetchTouristSite(limit: 10, offset: self.touristSites.count) {[weak self] result in
-                
+
+                //                    self?.tableView.endFooterRefreshing()
                 switch result {
                     
                 case .success(let touristSite):
-                    self?.tableView.endFooterRefreshing()
                     
                     
                     self?.totalToristSitesNum = touristSite.count
@@ -102,20 +112,46 @@ class RootViewController: BaseViewController {
                     
                 case .failure(let error):
                     self?.status = .error
-                    DispatchQueue.main.async {
-                        self?.view.acMakeToast("請求資料發生問題", duration: 3.0, position: .center)
-                    }
+//                    DispatchQueue.main.async {
+//                        self?.view.acMakeToast("請求資料發生問題", duration: 3.0, position: .center)
+//                    }
                     print(error)
                 }
             }
             
         } else {
+             status = .noNetWork
+//            if touristSites.count > 0 {
+//                self.view.acMakeToast("沒有網路連線，請檢查網路", duration: 3.0, position: .center)
+//            } else {
+//                noNetWorkAlertLayer.isHidden = false
+//            }
+//            tableView.endFooterRefreshing()
+        }
+    }
+    
+    func changeUI(_ status: RootViewControllerStatus) {
+        switch status {
+        case .noNetWork:
+            
             if touristSites.count > 0 {
-                self.view.acMakeToast("沒有網路連線，請檢查網路", duration: 3.0, position: .center)
+                view.acMakeToast("沒有網路連線，請檢查網路", duration: 3.0, position: .center)
             } else {
                 noNetWorkAlertLayer.isHidden = false
             }
             tableView.endFooterRefreshing()
+            
+        case .loading:
+            noNetWorkAlertLayer.isHidden = true
+            
+        case .getResult:
+            tableView.endFooterRefreshing()
+            
+        case .error:
+            view.acMakeToast("請求資料發生問題", duration: 3.0, position: .center)
+                           
+        default:
+            return
         }
     }
 
@@ -233,6 +269,8 @@ extension RootViewController: SitesListImageCellDelegate {
 enum RootViewControllerStatus {
     case error
     case normal
+    case getResult
     case loading
     case empty
+    case noNetWork
 }
