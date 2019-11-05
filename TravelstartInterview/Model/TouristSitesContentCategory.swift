@@ -25,7 +25,7 @@ enum TouristSitesContentCategory: String {
         }
     }
     
-    func cellForIndexPath(_ indexPath: IndexPath, tableView: UITableView, data: TouristSitesDetail) -> UITableViewCell {
+    func cellForIndexPath(_ indexPath: IndexPath, tableView: UITableView, data: TouristSitesDetail, controller: DetailStringTableViewCellDelegate?) -> UITableViewCell {
         
         guard
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier(), for: indexPath)
@@ -52,6 +52,8 @@ enum TouristSitesContentCategory: String {
         case .traffic:
             cell.layoutCell(title: self.rawValue, text: data.info)
         }
+        cell.delegate = controller
+        
         return cell
     }
 }

@@ -41,6 +41,7 @@
 		91E0526923710DC600D0D49E /* TouristSitesContentCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E0526823710DC600D0D49E /* TouristSitesContentCategory.swift */; };
 		91E0526C23711D8E00D0D49E /* SitesListDescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E0526A23711D8E00D0D49E /* SitesListDescriptionTableViewCell.swift */; };
 		91E0526D23711D8E00D0D49E /* SitesListDescriptionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91E0526B23711D8E00D0D49E /* SitesListDescriptionTableViewCell.xib */; };
+		91E0526F23714A8F00D0D49E /* TouristSitesListContentCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E0526E23714A8F00D0D49E /* TouristSitesListContentCategory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +94,7 @@
 		91E0526823710DC600D0D49E /* TouristSitesContentCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouristSitesContentCategory.swift; sourceTree = "<group>"; };
 		91E0526A23711D8E00D0D49E /* SitesListDescriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SitesListDescriptionTableViewCell.swift; sourceTree = "<group>"; };
 		91E0526B23711D8E00D0D49E /* SitesListDescriptionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SitesListDescriptionTableViewCell.xib; sourceTree = "<group>"; };
+		91E0526E23714A8F00D0D49E /* TouristSitesListContentCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouristSitesListContentCategory.swift; sourceTree = "<group>"; };
 		92FC56501E13C80FF3D84A2C /* Pods_TravelstartInterviewTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TravelstartInterviewTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A692B4359828453BE9C2885 /* Pods-TravelstartInterview.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelstartInterview.debug.xcconfig"; path = "Target Support Files/Pods-TravelstartInterview/Pods-TravelstartInterview.debug.xcconfig"; sourceTree = "<group>"; };
 		D852DF4AD0290E5BED893E2E /* Pods-TravelstartInterviewTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelstartInterviewTests.debug.xcconfig"; path = "Target Support Files/Pods-TravelstartInterviewTests/Pods-TravelstartInterviewTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 				912297BD236ABDD2007B8059 /* TouristSites.swift */,
 				912297BF236C2D0E007B8059 /* APIManager.swift */,
 				91E0526823710DC600D0D49E /* TouristSitesContentCategory.swift */,
+				91E0526E23714A8F00D0D49E /* TouristSitesListContentCategory.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -241,11 +244,11 @@
 			children = (
 				912297C8236C6A55007B8059 /* SitesListTitleTableViewCell.swift */,
 				912297C9236C6A55007B8059 /* SitesListTitleTableViewCell.xib */,
+				91E0526A23711D8E00D0D49E /* SitesListDescriptionTableViewCell.swift */,
+				91E0526B23711D8E00D0D49E /* SitesListDescriptionTableViewCell.xib */,
 				912297D0236C6A9D007B8059 /* SitesListImageTableViewCell.swift */,
 				912297D1236C6A9D007B8059 /* SitesListImageTableViewCell.xib */,
 				91E0525D236F34E400D0D49E /* imageCollectionView */,
-				91E0526A23711D8E00D0D49E /* SitesListDescriptionTableViewCell.swift */,
-				91E0526B23711D8E00D0D49E /* SitesListDescriptionTableViewCell.xib */,
 			);
 			path = SitesListTableViewCell;
 			sourceTree = "<group>";
@@ -466,6 +469,7 @@
 				91E0526923710DC600D0D49E /* TouristSitesContentCategory.swift in Sources */,
 				9122978E23692D6B007B8059 /* AppDelegate.swift in Sources */,
 				912297DB236C70C7007B8059 /* SitesListImageCollectionViewCell.swift in Sources */,
+				91E0526F23714A8F00D0D49E /* TouristSitesListContentCategory.swift in Sources */,
 				91E05258236ED18700D0D49E /* MJRefreshWrapper.swift in Sources */,
 				912297C0236C2D0E007B8059 /* APIManager.swift in Sources */,
 				912297E0236D5126007B8059 /* DetailViewController.swift in Sources */,

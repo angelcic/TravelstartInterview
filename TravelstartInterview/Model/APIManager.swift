@@ -15,6 +15,7 @@ protocol APIManagerProtocol {
                           resultHandler: @escaping (Result<TouristSitesResult, Error>) -> Void)
     
     var isNetworkConnect: Bool { get set }
+    var httpClient: HTTPClient { get set }
 }
 
 class APIManager: APIManagerProtocol {
@@ -24,6 +25,8 @@ class APIManager: APIManagerProtocol {
     let decoder = JSONDecoder()
     
     let monitor = NWPathMonitor()
+    
+    var httpClient: HTTPClient = HTTPClient.shared
     
     var isNetworkConnect = false
     
@@ -45,7 +48,7 @@ class APIManager: APIManagerProtocol {
     func fetchTouristSite(limit: Int = 10,
                           offset: Int,
                           resultHandler: @escaping (Result<TouristSitesResult, Error>) -> Void) {
-        HTTPClient.shared.httpRequest(request: TouristSitesRequest.TaipeiTouristSites(limit: limit, offest: offset)) { result in
+        httpClient.httpRequest(request: TouristSitesRequest.TaipeiTouristSites(limit: limit, offest: offset)) { result in
 
                 switch result {
 
@@ -55,7 +58,7 @@ class APIManager: APIManagerProtocol {
 
                     do {
                         let touristSiteData = try decoder.decode(TouristSites.self, from: data)
-//                        print(touristSiteData.result.results)
+                        
                         resultHandler(Result.success(touristSiteData.result))
 
                     } catch let error {

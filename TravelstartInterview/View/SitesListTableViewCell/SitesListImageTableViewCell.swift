@@ -65,8 +65,6 @@ class SitesListImageTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }    
 }
 
@@ -78,12 +76,6 @@ extension SitesListImageTableViewCell: UICollectionViewDelegateFlowLayout {
         
     }
     
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        print(collectionView.bounds.width)
-//        let width = (collectionView.bounds.width - minCollectionViewSpacing) / 2
-//        let height = width / 3 * 2
-//        return CGSize(width: width, height: height)
-//    }
 }
 
 

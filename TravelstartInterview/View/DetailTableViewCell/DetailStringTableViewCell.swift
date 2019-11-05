@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol DetailStringTVCDelegate: AnyObject {
+protocol DetailStringTableViewCellDelegate: AnyObject {
     func pressRightButton(_ cell: DetailStringTableViewCell)
 }
 
@@ -18,7 +18,7 @@ class DetailStringTableViewCell: UITableViewCell {
     @IBOutlet weak var innerText: UILabel!
     @IBOutlet weak var navigationButton: UIButton!
     
-    weak var delegate: DetailStringTVCDelegate?
+    weak var delegate: DetailStringTableViewCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()

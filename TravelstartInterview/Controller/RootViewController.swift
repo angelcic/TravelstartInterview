@@ -18,45 +18,45 @@ class RootViewController: BaseViewController {
         }
     }
     
-    @IBOutlet weak var noNetWorkAlertLayer: UIView! {
-        didSet {
-//            setupStatusObserer()
-        }
-    }
+    @IBOutlet weak var noNetWorkAlertLayer: UIView!
     
     var touristSites: [TouristSitesDetail] = [] {
         didSet {
+            
             if touristSites.count >= totalToristSitesNum {
                 tableView.endWithNoMoreData()
             }
+            
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
         }
     }
     
+    lazy var sectionContent: [TouristSitesListContentCategory] =
+        [.title, .description, .imageCollectionView(vc: self)]
+    
     var totalToristSitesNum = 0 // server 上資料筆數
     
     var touristSitesProvider: APIManagerProtocol = APIManager.shared
     
-    lazy var changeUIByStatus: ((_:RootViewControllerStatus) -> Void) = changeUI
+//    lazy var changeUIByStatus: ((_:RootViewControllerStatus) -> Void) = changeUI
     
     var status: RootViewControllerStatus = .normal {
         didSet{
-            changeUIByStatus(status)
+//            changeUIByStatus(status)
+            changeUI(status)
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
         self.navigationItem.title = "台北市熱門景點"
                 
         setupTableView()
         
         fetchTouristSites()
-        
-//        fetchTouristSites(limit: 10, offset: 170)
     }
 
     func setupTableView() {
@@ -77,34 +77,23 @@ class RootViewController: BaseViewController {
         }
     }
     
-    func fetchTouristSites(limit: Int, offset: Int) {
-        APIManager.shared.fetchTouristSite(limit: limit, offset: offset) { result in
-            switch result {
-            case .success(let touristSite):
-                self.touristSites += touristSite.results
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-    
     func fetchTouristSites() {
         if touristSitesProvider.isNetworkConnect && status != .loading {
-//            noNetWorkAlertLayer.isHidden = true
             
             status = .loading
             
             touristSitesProvider.fetchTouristSite(limit: 10, offset: self.touristSites.count) {[weak self] result in
 
-                //                    self?.tableView.endFooterRefreshing()
                 switch result {
                     
                 case .success(let touristSite):
                     
                     
                     self?.totalToristSitesNum = touristSite.count
+                    
                     if touristSite.results.count == 0 {
                         self?.status = .empty
+                        
                     } else {
                         self?.status = .normal
                         self?.touristSites += touristSite.results
@@ -112,26 +101,19 @@ class RootViewController: BaseViewController {
                     
                 case .failure(let error):
                     self?.status = .error
-//                    DispatchQueue.main.async {
-//                        self?.view.acMakeToast("請求資料發生問題", duration: 3.0, position: .center)
-//                    }
                     print(error)
                 }
             }
             
         } else {
              status = .noNetWork
-//            if touristSites.count > 0 {
-//                self.view.acMakeToast("沒有網路連線，請檢查網路", duration: 3.0, position: .center)
-//            } else {
-//                noNetWorkAlertLayer.isHidden = false
-//            }
-//            tableView.endFooterRefreshing()
         }
     }
     
     func changeUI(_ status: RootViewControllerStatus) {
+        
         switch status {
+            
         case .noNetWork:
             
             if touristSites.count > 0 {
@@ -156,6 +138,7 @@ class RootViewController: BaseViewController {
     }
 
     func navigationToDetailPage(tourist: TouristSitesDetail, images: [String], imageIndex: Int) {
+        
         guard
             let detailVC = UIStoryboard.main.instantiateViewController(
                 withIdentifier: DetailViewController.identifier
@@ -198,54 +181,16 @@ extension RootViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch indexPath.row {
-        case 0:
-            guard
-                let cell = tableView.dequeueReusableCell(
-                    withIdentifier: SitesListTitleTableViewCell.identifier,
-                    for: indexPath)
-                    as? SitesListTitleTableViewCell
-            else {
-                return UITableViewCell()
-            }
-            
-            cell.layoutCell(title: touristSites[indexPath.section].stitle)
-            
-            return cell
-
-        case 1:
-            guard
-                let cell = tableView.dequeueReusableCell(
-                    withIdentifier: SitesListDescriptionTableViewCell.identifier,
-                    for: indexPath)
-                    as? SitesListDescriptionTableViewCell
-            else {
-                return UITableViewCell()
-            }
-            
-            cell.layoutCell(description: touristSites[indexPath.section].xbody)
-            
-            return cell
-
-        case 2:
-            guard
-                let cell = tableView.dequeueReusableCell(
-                    withIdentifier: SitesListImageTableViewCell.identifier,
-                    for: indexPath)
-                    as? SitesListImageTableViewCell
-            else {
-                return UITableViewCell()
-            }
-                        
-            cell.delegate = self
-            cell.layoutCell(images: touristSites[indexPath.section].images)
-            
-            return cell
-            
-        default:
-            return UITableViewCell()
-        }
         
+        let tsContent = sectionContent[indexPath.row]
+        
+        let cell = tsContent.cellForIndexPath(
+            indexPath,
+            tableView: tableView,
+            data: touristSites[indexPath.section]
+        )
+        
+        return cell
     }
     
 }
@@ -253,15 +198,20 @@ extension RootViewController: UITableViewDataSource {
 extension RootViewController: SitesListImageCellDelegate {
     
     func pressImageCell(_ cell: UITableViewCell, _ images: [String], _ imageIndex: Int) {
+        
         guard
             let indexPath = tableView.indexPath(for: cell)
-        else { return }
+        else {
+            return
+        }
         
         let touristSitesDetail = touristSites[indexPath.section]
         
-        navigationToDetailPage(tourist: touristSitesDetail,
-                               images: images,
-                               imageIndex: imageIndex)
+        navigationToDetailPage(
+            tourist: touristSitesDetail,
+            images: images,
+            imageIndex: imageIndex
+        )
     }
     
 }

@@ -17,23 +17,28 @@ class DetailViewController: BaseViewController {
         }
     }
     
-//    @IBOutlet weak var imageGallery: UIStackView!
     @IBOutlet weak var imageGallery: TSGalleryView!
     
     var currentImageIndex = 0
     
     var imageSet: [String] = [] {
         didSet {
+            
             guard let imageGallery = imageGallery else {
                 return
             }
-            imageGallery.datas = imageSet
+            
+            imageGallery.setupGallery(
+                imageURLs: imageSet,
+                index: currentImageIndex
+            )
         }
     }
     
     var sitesData: TouristSitesDetail?
     
-    var detailContent: [TouristSitesContentCategory] = [.description, .name, .address, .time, .traffic]
+    var detailContent: [TouristSitesContentCategory] =
+        [.description, .name, .address, .time, .traffic]
     
     
     override func viewDidLoad() {
@@ -41,7 +46,10 @@ class DetailViewController: BaseViewController {
         
         setupTableView()
         
-        imageGallery.setupGallery(imageURLs: imageSet, index: currentImageIndex)
+        imageGallery.setupGallery(
+            imageURLs: imageSet,
+            index: currentImageIndex
+        )
     }
     
     func initDetailVC(sitesData: TouristSitesDetail,
@@ -56,11 +64,15 @@ class DetailViewController: BaseViewController {
     }
     
     func setupTableView() {
-        tableView.registerCellWithNib(identifier: DetailStringTableViewCell.identifier, bundle: nil)
+        tableView.registerCellWithNib(
+            identifier: DetailStringTableViewCell.identifier,
+            bundle: nil)
     }
     
     func navigationWithMapApp() {
-        guard let latitudeString = sitesData?.latitude,
+        
+        guard
+            let latitudeString = sitesData?.latitude,
             let latitude = Double(latitudeString),
             let longitudeString = sitesData?.longitude,
             let longitude = Double(longitudeString)
@@ -68,26 +80,29 @@ class DetailViewController: BaseViewController {
             return
         }
         
-        if let url =
-            URL(string: MapNavigation.google(
-                latitude: latitude,
-                longitude: longitude).url),
+        let googleMapURLString = MapNavigation.google(
+            latitude: latitude,
+            longitude: longitude
+        ).url
+        
+        let appleMapURLString = MapNavigation.apple(
+            latitude: latitude,
+            longitude: longitude
+        ).url
+        
+        if let url = URL(string: googleMapURLString),
             UIApplication.shared.canOpenURL(url) {
             
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
             
         // 跳轉至 apple map
-        } else if let url =
-            URL(string: MapNavigation.apple(
-                latitude: latitude,
-                longitude: longitude).url),
+        } else if let url = URL(string: appleMapURLString),
             UIApplication.shared.canOpenURL(url) {
             
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
             
         }
     }
-    
 }
 
 extension DetailViewController: UITableViewDelegate {
@@ -107,27 +122,37 @@ extension DetailViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        let cell = detailContent[indexPath.row].cellForIndexPath(indexPath,
-                                                                 tableView: tableView,
-                                                                 data: sitesData)
+        let tsContent = detailContent[indexPath.row]
+        let cell = tsContent.cellForIndexPath(
+            indexPath,
+            tableView: tableView,
+            data: sitesData,
+            controller: self
+        )
         
         return cell
     }
     
 }
 
-extension DetailViewController :DetailStringTVCDelegate {
+extension DetailViewController: DetailStringTableViewCellDelegate {
+    
     func pressRightButton(_ cell: DetailStringTableViewCell) {
         navigationWithMapApp()
     }
+    
 }
 
 enum MapNavigation {
+    
     case google(latitude: Double, longitude: Double)
+    
     case apple(latitude: Double, longitude: Double)
     
     var url: String {
+        
         switch self {
+            
         case .google(let latitude, let longitude):
             return "comgooglemaps://?saddr=&daddr=\(latitude),\(longitude)&directionsmode=driving"
             
