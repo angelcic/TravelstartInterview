@@ -15,7 +15,7 @@ protocol APIManagerProtocol {
                           resultHandler: @escaping (Result<TouristSitesResult, Error>) -> Void)
     
     var isNetworkConnect: Bool { get set }
-    var httpClient: HTTPClient { get set }
+//    var httpClient: HTTPClient { get set }
 }
 
 class APIManager: APIManagerProtocol {
@@ -26,11 +26,12 @@ class APIManager: APIManagerProtocol {
     
     let monitor = NWPathMonitor()
     
-    var httpClient: HTTPClient = HTTPClient.shared
+    let httpClient: HTTPClient
     
     var isNetworkConnect = false
     
-    init() {
+    init(httpClient: HTTPClient = HTTPClient.shared) {
+        self.httpClient = httpClient
         setupNetworkObserver()
     }
     
@@ -38,15 +39,17 @@ class APIManager: APIManagerProtocol {
         monitor.pathUpdateHandler = {[weak self] path in
             if path.status == .satisfied {
                 self?.isNetworkConnect = true
+                print("connect")
             } else {
                 self?.isNetworkConnect = false
+                print("unconnect")
             }
         }
         monitor.start(queue: DispatchQueue.global())
     }
     
     func fetchTouristSite(limit: Int = 10,
-                          offset: Int,
+                          offset: Int = 0,
                           resultHandler: @escaping (Result<TouristSitesResult, Error>) -> Void) {
         httpClient.httpRequest(request: TouristSitesRequest.TaipeiTouristSites(limit: limit, offest: offset)) { result in
 

@@ -40,11 +40,8 @@ class RootViewController: BaseViewController {
     
     var touristSitesProvider: APIManagerProtocol = APIManager.shared
     
-//    lazy var changeUIByStatus: ((_:RootViewControllerStatus) -> Void) = changeUI
-    
     var status: RootViewControllerStatus = .normal {
         didSet{
-//            changeUIByStatus(status)
             changeUI(status)
         }
     }
@@ -78,16 +75,14 @@ class RootViewController: BaseViewController {
     }
     
     func fetchTouristSites() {
-        if touristSitesProvider.isNetworkConnect && status != .loading {
-            
-            status = .loading
+        
+        if checkAPIStatus() {
             
             touristSitesProvider.fetchTouristSite(limit: 10, offset: self.touristSites.count) {[weak self] result in
 
                 switch result {
                     
                 case .success(let touristSite):
-                    
                     
                     self?.totalToristSitesNum = touristSite.count
                     
@@ -104,9 +99,17 @@ class RootViewController: BaseViewController {
                     print(error)
                 }
             }
+        }
+    }
+    
+    func checkAPIStatus() -> Bool {
+        if touristSitesProvider.isNetworkConnect && status != .loading {
+            status = .loading
+            return true
             
         } else {
-             status = .noNetWork
+            status = .noNetWork
+            return false
         }
     }
     

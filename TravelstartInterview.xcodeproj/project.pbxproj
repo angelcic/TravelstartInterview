@@ -219,10 +219,7 @@
 		912297B8236AAA4C007B8059 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				912297B9236AAA68007B8059 /* HTTPClient.swift */,
-				912297BB236ABBD6007B8059 /* TouristSitesRequest.swift */,
-				912297BD236ABDD2007B8059 /* TouristSites.swift */,
-				912297BF236C2D0E007B8059 /* APIManager.swift */,
+				91E052702371651800D0D49E /* API */,
 				91E0526823710DC600D0D49E /* TouristSitesContentCategory.swift */,
 				91E0526E23714A8F00D0D49E /* TouristSitesListContentCategory.swift */,
 			);
@@ -287,6 +284,17 @@
 				91E0525B236F021A00D0D49E /* TSGalleryView.swift */,
 			);
 			path = UITool;
+			sourceTree = "<group>";
+		};
+		91E052702371651800D0D49E /* API */ = {
+			isa = PBXGroup;
+			children = (
+				912297B9236AAA68007B8059 /* HTTPClient.swift */,
+				912297BB236ABBD6007B8059 /* TouristSitesRequest.swift */,
+				912297BD236ABDD2007B8059 /* TouristSites.swift */,
+				912297BF236C2D0E007B8059 /* APIManager.swift */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

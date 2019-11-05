@@ -34,7 +34,7 @@ class HTTPClient {
     
     private let encoder = JSONEncoder()
     
-    private init() {}
+    init() {}
     
     func httpRequest(request: Request,
                      completion: @escaping (Result<Data, Error>) -> Void) {
