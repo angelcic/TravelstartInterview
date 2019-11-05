@@ -33,11 +33,9 @@ class RootViewController: BaseViewController {
     
     var totalToristSitesNum = 0 // server 上資料筆數
     
-//    var touristSitesObserver: NSKeyValueObservation!
-    
     var touristSitesProvider: APIManagerProtocol = APIManager.shared
     
-    var status: RootViewControllerStatus = .loading
+    var status: RootViewControllerStatus = .normal
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,9 +53,11 @@ class RootViewController: BaseViewController {
         tableView.registerCellWithNib(
             identifier: SitesListTitleTableViewCell.identifier,
             bundle: nil)
+        
         tableView.registerCellWithNib(
-            identifier: SitesListDiscriptionTableViewCell.identifier,
+            identifier: SitesListDescriptionTableViewCell.identifier,
             bundle: nil)
+        
         tableView.registerCellWithNib(
             identifier: SitesListImageTableViewCell.identifier,
             bundle: nil)
@@ -79,11 +79,11 @@ class RootViewController: BaseViewController {
     }
     
     func fetchTouristSites() {
-        if touristSitesProvider.isNetworkConnect {
+        if touristSitesProvider.isNetworkConnect && status != .loading {
             noNetWorkAlertLayer.isHidden = true
             
-            
             status = .loading
+            
             touristSitesProvider.fetchTouristSite(limit: 10, offset: self.touristSites.count) {[weak self] result in
                 
                 switch result {
@@ -108,6 +108,7 @@ class RootViewController: BaseViewController {
                     print(error)
                 }
             }
+            
         } else {
             if touristSites.count > 0 {
                 self.view.acMakeToast("沒有網路連線，請檢查網路", duration: 3.0, position: .center)
@@ -179,14 +180,14 @@ extension RootViewController: UITableViewDataSource {
         case 1:
             guard
                 let cell = tableView.dequeueReusableCell(
-                    withIdentifier: SitesListDiscriptionTableViewCell.identifier,
+                    withIdentifier: SitesListDescriptionTableViewCell.identifier,
                     for: indexPath)
-                    as? SitesListDiscriptionTableViewCell
+                    as? SitesListDescriptionTableViewCell
             else {
                 return UITableViewCell()
             }
             
-            cell.layoutCell(discription: touristSites[indexPath.section].xbody)
+            cell.layoutCell(description: touristSites[indexPath.section].xbody)
             
             return cell
 
@@ -211,7 +212,6 @@ extension RootViewController: UITableViewDataSource {
         
     }
     
-    
 }
 
 extension RootViewController: SitesListImageCellDelegate {
@@ -223,7 +223,9 @@ extension RootViewController: SitesListImageCellDelegate {
         
         let touristSitesDetail = touristSites[indexPath.section]
         
-        navigationToDetailPage(tourist: touristSitesDetail, images: images, imageIndex: imageIndex)
+        navigationToDetailPage(tourist: touristSitesDetail,
+                               images: images,
+                               imageIndex: imageIndex)
     }
     
 }

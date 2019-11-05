@@ -1,16 +1,16 @@
 //
-//  SitesListDiscriptionTableViewCell.swift
+//  SitesListDescriptionTableViewCell.swift
 //  TravelstartInterview
 //
-//  Created by iching chen on 2019/11/1.
+//  Created by iching chen on 2019/11/5.
 //  Copyright © 2019 ichingchen. All rights reserved.
 //
 
 import UIKit
 
-class SitesListDiscriptionTableViewCell: UITableViewCell {
+class SitesListDescriptionTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var discriptionLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,8 +23,8 @@ class SitesListDiscriptionTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func layoutCell(discription: String) {
-        discriptionLabel.text = discription
+    func layoutCell(description: String) {
+        descriptionLabel.text = description
     }
     
 }

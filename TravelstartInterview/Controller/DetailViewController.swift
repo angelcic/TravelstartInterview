@@ -33,27 +33,15 @@ class DetailViewController: BaseViewController {
     
     var sitesData: TouristSitesDetail?
     
-    var detailContent: [DetailContent] {
-        
-        guard let sitesData = sitesData else { return [] }
-        
-        return [
-            DetailContent(subtitle: "景點名稱", contentText: sitesData.stitle),
-            DetailContent(subtitle: "景點介紹", contentText: sitesData.xbody),
-            DetailContent(subtitle: "地址", contentText: sitesData.address),
-            DetailContent(subtitle: "開放時間", contentText: sitesData.memoTime),
-            DetailContent(subtitle: "交通資訊", contentText: sitesData.info)
-//            DetailContent(subtitle: "鄰近捷運", contentText: sitesData.stitle),
-//            DetailContent(subtitle: "地圖", contentText: sitesData.stitle)
-        ]
-    }
+    var detailContent: [TouristSitesContentCategory] = [.description, .name, .address, .time, .traffic]
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupTableView()
+        
         imageGallery.setupGallery(imageURLs: imageSet, index: currentImageIndex)
-//        imageGallery.datas = imageSet
     }
     
     func initDetailVC(sitesData: TouristSitesDetail,
@@ -112,27 +100,28 @@ extension DetailViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard
-            let cell = tableView.dequeueReusableCell(
-                withIdentifier: DetailStringTableViewCell.identifier,
-                for: indexPath)
-            as? DetailStringTableViewCell
-        else {
-            return UITableViewCell()
-        }
-        
-        let title = detailContent[indexPath.row].subtitle
-        var isHiddenRightButton = true
-        
-        if title == "地址" {
-            isHiddenRightButton = false
-            cell.delegate = self
-        }
-        
-        cell.layoutCell(title: detailContent[indexPath.row].subtitle,
-                        text: detailContent[indexPath.row].contentText,
-                        isHiddenButton: isHiddenRightButton)
-        
+//        guard
+//            let cell = tableView.dequeueReusableCell(
+//                withIdentifier: DetailStringTableViewCell.identifier,
+//                for: indexPath)
+//            as? DetailStringTableViewCell
+//        else {
+//            return UITableViewCell()
+//        }
+//
+//        let title = detailContent[indexPath.row].subtitle
+//        var isHiddenRightButton = true
+//
+//        if title == "地址" {
+//            isHiddenRightButton = false
+//            cell.delegate = self
+//        }
+//
+//        cell.layoutCell(title: detailContent[indexPath.row].subtitle,
+//                        text: detailContent[indexPath.row].contentText,
+//                        isHiddenButton: isHiddenRightButton)
+        guard let sitesData = sitesData else {return UITableViewCell()}
+        let cell = detailContent[indexPath.row].cellForIndexPath(indexPath, tableView: tableView, data: sitesData)
         return cell
     }
     

@@ -14,10 +14,10 @@ protocol SitesListImageCellDelegate: AnyObject {
 
 class SitesListImageTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var collectionview: UICollectionView! {
+    @IBOutlet weak var collectionView: UICollectionView! {
         didSet {
-            collectionview.delegate = self
-            collectionview.dataSource = self
+            collectionView.delegate = self
+            collectionView.dataSource = self
         }
     }
     
@@ -25,9 +25,9 @@ class SitesListImageTableViewCell: UITableViewCell {
     
     var images: [String] = [] {
         didSet {
-            collectionview.reloadData()
+            collectionView.reloadData()
             if images.count > 0 {
-                collectionview.scrollToItem(at: IndexPath(row: 0, section: 0), at: .left, animated: false)
+                collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .left, animated: false)
             }
         }
     }
@@ -40,8 +40,21 @@ class SitesListImageTableViewCell: UITableViewCell {
         setupCollectionView()
     }
     
+    override func layoutSubviews() {
+        super .layoutSubviews()
+        guard
+            let layout = collectionView.collectionViewLayout
+            as? UICollectionViewFlowLayout
+        else { return }
+        
+        let width = (collectionView.bounds.width - minCollectionViewSpacing) / 2
+        let height = width / 3 * 2
+
+        layout.itemSize = CGSize(width: width, height: height)
+    }
+    
     func setupCollectionView() {
-        collectionview.registerCellWithNib(
+        collectionView.registerCellWithNib(
             identifier: SitesListImageCollectionViewCell.identifier,
             bundle: nil)
     }
@@ -65,11 +78,12 @@ extension SitesListImageTableViewCell: UICollectionViewDelegateFlowLayout {
         
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = (collectionView.bounds.width - minCollectionViewSpacing) / 2
-        let height = width / 3 * 2
-        return CGSize(width: width, height: height)
-    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        print(collectionView.bounds.width)
+//        let width = (collectionView.bounds.width - minCollectionViewSpacing) / 2
+//        let height = width / 3 * 2
+//        return CGSize(width: width, height: height)
+//    }
 }
 
 

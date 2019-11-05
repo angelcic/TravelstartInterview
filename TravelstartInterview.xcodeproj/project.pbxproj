@@ -24,8 +24,6 @@
 		912297C0236C2D0E007B8059 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912297BF236C2D0E007B8059 /* APIManager.swift */; };
 		912297CA236C6A55007B8059 /* SitesListTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912297C8236C6A55007B8059 /* SitesListTitleTableViewCell.swift */; };
 		912297CB236C6A55007B8059 /* SitesListTitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 912297C9236C6A55007B8059 /* SitesListTitleTableViewCell.xib */; };
-		912297CE236C6A7F007B8059 /* SitesListDiscriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912297CC236C6A7F007B8059 /* SitesListDiscriptionTableViewCell.swift */; };
-		912297CF236C6A7F007B8059 /* SitesListDiscriptionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 912297CD236C6A7F007B8059 /* SitesListDiscriptionTableViewCell.xib */; };
 		912297D2236C6A9D007B8059 /* SitesListImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912297D0236C6A9D007B8059 /* SitesListImageTableViewCell.swift */; };
 		912297D3236C6A9D007B8059 /* SitesListImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 912297D1236C6A9D007B8059 /* SitesListImageTableViewCell.xib */; };
 		912297D6236C6FB5007B8059 /* UICollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912297D5236C6FB5007B8059 /* UICollectionViewExtension.swift */; };
@@ -40,6 +38,9 @@
 		91E05260236F353100D0D49E /* DetailStringTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E0525E236F353100D0D49E /* DetailStringTableViewCell.swift */; };
 		91E05261236F353100D0D49E /* DetailStringTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91E0525F236F353100D0D49E /* DetailStringTableViewCell.xib */; };
 		91E05265236FF9A500D0D49E /* ToastWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E05264236FF9A500D0D49E /* ToastWrapper.swift */; };
+		91E0526923710DC600D0D49E /* TouristSitesContentCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E0526823710DC600D0D49E /* TouristSitesContentCategory.swift */; };
+		91E0526C23711D8E00D0D49E /* SitesListDescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E0526A23711D8E00D0D49E /* SitesListDescriptionTableViewCell.swift */; };
+		91E0526D23711D8E00D0D49E /* SitesListDescriptionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91E0526B23711D8E00D0D49E /* SitesListDescriptionTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,8 +76,6 @@
 		912297BF236C2D0E007B8059 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		912297C8236C6A55007B8059 /* SitesListTitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SitesListTitleTableViewCell.swift; sourceTree = "<group>"; };
 		912297C9236C6A55007B8059 /* SitesListTitleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SitesListTitleTableViewCell.xib; sourceTree = "<group>"; };
-		912297CC236C6A7F007B8059 /* SitesListDiscriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SitesListDiscriptionTableViewCell.swift; sourceTree = "<group>"; };
-		912297CD236C6A7F007B8059 /* SitesListDiscriptionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SitesListDiscriptionTableViewCell.xib; sourceTree = "<group>"; };
 		912297D0236C6A9D007B8059 /* SitesListImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SitesListImageTableViewCell.swift; sourceTree = "<group>"; };
 		912297D1236C6A9D007B8059 /* SitesListImageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SitesListImageTableViewCell.xib; sourceTree = "<group>"; };
 		912297D5236C6FB5007B8059 /* UICollectionViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtension.swift; sourceTree = "<group>"; };
@@ -91,6 +90,9 @@
 		91E0525E236F353100D0D49E /* DetailStringTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailStringTableViewCell.swift; sourceTree = "<group>"; };
 		91E0525F236F353100D0D49E /* DetailStringTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailStringTableViewCell.xib; sourceTree = "<group>"; };
 		91E05264236FF9A500D0D49E /* ToastWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastWrapper.swift; sourceTree = "<group>"; };
+		91E0526823710DC600D0D49E /* TouristSitesContentCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouristSitesContentCategory.swift; sourceTree = "<group>"; };
+		91E0526A23711D8E00D0D49E /* SitesListDescriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SitesListDescriptionTableViewCell.swift; sourceTree = "<group>"; };
+		91E0526B23711D8E00D0D49E /* SitesListDescriptionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SitesListDescriptionTableViewCell.xib; sourceTree = "<group>"; };
 		92FC56501E13C80FF3D84A2C /* Pods_TravelstartInterviewTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TravelstartInterviewTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A692B4359828453BE9C2885 /* Pods-TravelstartInterview.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelstartInterview.debug.xcconfig"; path = "Target Support Files/Pods-TravelstartInterview/Pods-TravelstartInterview.debug.xcconfig"; sourceTree = "<group>"; };
 		D852DF4AD0290E5BED893E2E /* Pods-TravelstartInterviewTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelstartInterviewTests.debug.xcconfig"; path = "Target Support Files/Pods-TravelstartInterviewTests/Pods-TravelstartInterviewTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 				912297BB236ABBD6007B8059 /* TouristSitesRequest.swift */,
 				912297BD236ABDD2007B8059 /* TouristSites.swift */,
 				912297BF236C2D0E007B8059 /* APIManager.swift */,
+				91E0526823710DC600D0D49E /* TouristSitesContentCategory.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -238,11 +241,11 @@
 			children = (
 				912297C8236C6A55007B8059 /* SitesListTitleTableViewCell.swift */,
 				912297C9236C6A55007B8059 /* SitesListTitleTableViewCell.xib */,
-				912297CC236C6A7F007B8059 /* SitesListDiscriptionTableViewCell.swift */,
-				912297CD236C6A7F007B8059 /* SitesListDiscriptionTableViewCell.xib */,
 				912297D0236C6A9D007B8059 /* SitesListImageTableViewCell.swift */,
 				912297D1236C6A9D007B8059 /* SitesListImageTableViewCell.xib */,
 				91E0525D236F34E400D0D49E /* imageCollectionView */,
+				91E0526A23711D8E00D0D49E /* SitesListDescriptionTableViewCell.swift */,
+				91E0526B23711D8E00D0D49E /* SitesListDescriptionTableViewCell.xib */,
 			);
 			path = SitesListTableViewCell;
 			sourceTree = "<group>";
@@ -368,8 +371,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				912297D3236C6A9D007B8059 /* SitesListImageTableViewCell.xib in Resources */,
+				91E0526D23711D8E00D0D49E /* SitesListDescriptionTableViewCell.xib in Resources */,
 				9122979A23692D70007B8059 /* LaunchScreen.storyboard in Resources */,
-				912297CF236C6A7F007B8059 /* SitesListDiscriptionTableViewCell.xib in Resources */,
 				91E05261236F353100D0D49E /* DetailStringTableViewCell.xib in Resources */,
 				912297CB236C6A55007B8059 /* SitesListTitleTableViewCell.xib in Resources */,
 				9122979723692D70007B8059 /* Assets.xcassets in Resources */,
@@ -459,8 +462,8 @@
 				91E0525C236F021A00D0D49E /* TSGalleryView.swift in Sources */,
 				9122979223692D6B007B8059 /* RootViewController.swift in Sources */,
 				912297B023693EB2007B8059 /* BaseViewController.swift in Sources */,
-				912297CE236C6A7F007B8059 /* SitesListDiscriptionTableViewCell.swift in Sources */,
 				912297D6236C6FB5007B8059 /* UICollectionViewExtension.swift in Sources */,
+				91E0526923710DC600D0D49E /* TouristSitesContentCategory.swift in Sources */,
 				9122978E23692D6B007B8059 /* AppDelegate.swift in Sources */,
 				912297DB236C70C7007B8059 /* SitesListImageCollectionViewCell.swift in Sources */,
 				91E05258236ED18700D0D49E /* MJRefreshWrapper.swift in Sources */,
@@ -470,6 +473,7 @@
 				912297D2236C6A9D007B8059 /* SitesListImageTableViewCell.swift in Sources */,
 				91E0525A236ED66500D0D49E /* KingFisherWrapper.swift in Sources */,
 				9122979023692D6B007B8059 /* SceneDelegate.swift in Sources */,
+				91E0526C23711D8E00D0D49E /* SitesListDescriptionTableViewCell.swift in Sources */,
 				912297B7236AA91A007B8059 /* UIColorExtension.swift in Sources */,
 				91E05265236FF9A500D0D49E /* ToastWrapper.swift in Sources */,
 				912297BC236ABBD6007B8059 /* TouristSitesRequest.swift in Sources */,
