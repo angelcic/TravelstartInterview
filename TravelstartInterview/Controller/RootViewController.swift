@@ -38,7 +38,7 @@ class RootViewController: BaseViewController {
     
     var totalToristSitesNum = 0 // server 上資料筆數
     
-    var touristSitesProvider: APIManagerProtocol = APIManager.shared
+    var touristSitesProvider = APIManager.shared
     
     var status: RootViewControllerStatus = .normal {
         didSet{
@@ -76,10 +76,11 @@ class RootViewController: BaseViewController {
     
     func fetchTouristSites() {
         
-        if checkAPIStatus() {
+        if checkNetWorkStatus() {
             
             touristSitesProvider.fetchTouristSite(limit: 10, offset: self.touristSites.count) {[weak self] result in
-
+                self?.status = .getResult
+                
                 switch result {
                     
                 case .success(let touristSite):
@@ -102,7 +103,7 @@ class RootViewController: BaseViewController {
         }
     }
     
-    func checkAPIStatus() -> Bool {
+    func checkNetWorkStatus() -> Bool {
         if touristSitesProvider.isNetworkConnect && status != .loading {
             status = .loading
             return true
@@ -131,6 +132,9 @@ class RootViewController: BaseViewController {
             
         case .getResult:
             tableView.endFooterRefreshing()
+            
+        case .empty:
+            view.acMakeToast("查無資料", duration: 3.0, position: .center)
             
         case .error:
             view.acMakeToast("請求資料發生問題", duration: 3.0, position: .center)

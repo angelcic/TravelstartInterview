@@ -9,16 +9,7 @@
 import Foundation
 import Network
 
-protocol APIManagerProtocol {
-    func fetchTouristSite(limit: Int,
-                          offset: Int,
-                          resultHandler: @escaping (Result<TouristSitesResult, Error>) -> Void)
-    
-    var isNetworkConnect: Bool { get set }
-//    var httpClient: HTTPClient { get set }
-}
-
-class APIManager: APIManagerProtocol {
+class APIManager {
     
     static let shared = APIManager()
     
@@ -39,10 +30,8 @@ class APIManager: APIManagerProtocol {
         monitor.pathUpdateHandler = {[weak self] path in
             if path.status == .satisfied {
                 self?.isNetworkConnect = true
-                print("connect")
             } else {
                 self?.isNetworkConnect = false
-                print("unconnect")
             }
         }
         monitor.start(queue: DispatchQueue.global())
@@ -51,6 +40,7 @@ class APIManager: APIManagerProtocol {
     func fetchTouristSite(limit: Int = 10,
                           offset: Int = 0,
                           resultHandler: @escaping (Result<TouristSitesResult, Error>) -> Void) {
+        
         httpClient.httpRequest(request: TouristSitesRequest.TaipeiTouristSites(limit: limit, offest: offset)) { result in
 
                 switch result {

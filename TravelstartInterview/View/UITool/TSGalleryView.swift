@@ -14,7 +14,6 @@ class TSGalleryView: UIView {
     var datas: [String] = [] {
         didSet {
             setupScrollView()
-//            scrollToImage(at: imageIndex)
         }
     }
     
@@ -23,7 +22,6 @@ class TSGalleryView: UIView {
     
     var imageIndex: Int = 0 {
         didSet {
-//            setupScrollView()
             scrollToImage(at: imageIndex)
         }
     }
